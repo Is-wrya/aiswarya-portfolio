@@ -1,0 +1,389 @@
+/* ============================================
+   HERO SECTION — Moving Image Trail Background
+   ============================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--nav-height);
+  background-color: var(--black);
+}
+
+/* ---------- Decorative elements ---------- */
+.hero__deco-circle-1 {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-700);
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  pointer-events: none;
+  opacity: 0.2;
+  z-index: 3;
+}
+
+.hero__deco-circle-2 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-700);
+  position: absolute;
+  bottom: 15%;
+  left: 5%;
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 3;
+}
+
+.hero__deco-grid {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: 
+    linear-gradient(var(--gray-500) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gray-500) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 3;
+}
+
+.hero__deco-line {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gray-700), transparent);
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 3;
+}
+
+/* ============================================
+   IMAGE TRAIN — Continuous Scrolling Background
+   ============================================ */
+.hero__image-train {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Each row of scrolling images */
+.train__row {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.train__track {
+  display: flex;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  width: fit-content;
+  will-change: transform;
+  animation: trainScrollLeft 45s linear infinite;
+}
+
+.train__track--reverse {
+  animation: trainScrollRight 50s linear infinite;
+}
+
+/* Individual image card in the train */
+.train__card {
+  flex-shrink: 0;
+  width: clamp(160px, 18vw, 280px);
+  height: clamp(200px, 24vw, 380px);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.train__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%) brightness(0.55);
+  transition: filter 0.6s ease, transform 0.8s var(--ease-out-expo);
+}
+
+.train__card:hover img {
+  filter: grayscale(0%) brightness(0.75);
+  transform: scale(1.05);
+}
+
+.train__card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.1) 0%,
+    rgba(10, 10, 10, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+.train__card-label {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  font-family: var(--font-space-mono);
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  z-index: 2;
+}
+
+/* Row positioning — offset for depth feel */
+.train__row--1 {
+  transform: rotate(-3deg) scale(1.1);
+}
+
+.train__row--2 {
+  transform: rotate(-3deg) scale(1.1);
+  margin-top: -1rem;
+}
+
+/* Continuous scroll animations */
+@keyframes trainScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes trainScrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   HERO CONTENT — Text Over Moving Images
+   ============================================ */
+.hero__content {
+  position: relative;
+  z-index: 4;
+  padding: var(--space-xl) var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero__label {
+  font-family: var(--font-space-mono);
+  font-size: var(--font-mono);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero__label::before {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--accent);
+}
+
+.hero__name {
+  font-family: var(--font-playfair);
+  font-size: var(--font-display);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+}
+
+.hero__name-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__name-line span {
+  display: inline-block;
+}
+
+.hero__separator {
+  font-family: var(--font-space-mono);
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 400;
+  color: var(--accent);
+  margin: var(--space-sm) 0;
+  letter-spacing: 0.2em;
+  overflow: hidden;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero__separator span {
+  display: inline-block;
+}
+
+.hero__role {
+  font-family: var(--font-space-grotesk);
+  font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-200);
+  overflow: hidden;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero__role span {
+  display: inline-block;
+}
+
+/* ---------- Hero Stats ---------- */
+.hero__stats {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero__stat-number {
+  font-family: var(--font-playfair);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+.hero__stat-label {
+  font-family: var(--font-space-mono);
+  font-size: 0.7rem;
+  color: var(--gray-300);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ---------- Scroll Indicator ---------- */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: var(--container-padding);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-space-mono);
+  font-size: var(--font-small);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  z-index: 5;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 60px;
+  background-color: var(--gray-600);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  50.01% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero__content {
+    padding: var(--space-lg) var(--container-padding);
+  }
+
+  .hero__scroll-indicator {
+    display: none;
+  }
+
+  .hero__stats {
+    gap: var(--space-md);
+  }
+
+  .train__card {
+    width: 120px;
+    height: 160px;
+  }
+
+  .hero__deco-circle-1,
+  .hero__deco-grid {
+    display: none;
+  }
+
+  .train__row--1,
+  .train__row--2 {
+    transform: rotate(-3deg) scale(1.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__name {
+    font-size: clamp(2.5rem, 14vw, 5rem);
+  }
+
+  .hero__role {
+    font-size: clamp(0.875rem, 4vw, 1.25rem);
+    letter-spacing: 0.08em;
+  }
+
+  .hero__stats {
+    flex-wrap: wrap;
+  }
+
+  .train__card {
+    width: 100px;
+    height: 130px;
+  }
+}

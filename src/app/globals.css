@@ -1,40 +1,77 @@
+/* ============================================
+   GLOBAL STYLES — Dark Portfolio
+   ============================================ */
+
+/* ---------- CSS Custom Properties ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dark theme */
+  --black: #0a0a0a;
+  --white: #f5f5f5;
+  --gray-100: #e8e8e8;
+  --gray-200: #d4d4d4;
+  --gray-300: #a3a3a3;
+  --gray-400: #737373;
+  --gray-500: #525252;
+  --gray-600: #404040;
+  --gray-700: #262626;
+  --gray-800: #1a1a1a;
+  --gray-900: #111111;
+
+  /* Accent */
+  --accent: #c8a97e;
+
+  /* Typography Scale (fluid) */
+  --font-display: clamp(3.5rem, 8vw, 10rem);
+  --font-h1: clamp(2.5rem, 5vw, 6rem);
+  --font-h2: clamp(2rem, 4vw, 4.5rem);
+  --font-h3: clamp(1.5rem, 3vw, 2.5rem);
+  --font-h4: clamp(1.125rem, 2vw, 1.5rem);
+  --font-body: clamp(0.875rem, 1.2vw, 1.125rem);
+  --font-small: clamp(0.75rem, 1vw, 0.875rem);
+  --font-mono: clamp(0.75rem, 0.9vw, 0.875rem);
+
+  /* Spacing */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1.25rem);
+  --space-md: clamp(1rem, 2vw, 2rem);
+  --space-lg: clamp(2rem, 4vw, 4rem);
+  --space-xl: clamp(3rem, 6vw, 6rem);
+  --space-2xl: clamp(4rem, 8vw, 10rem);
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 0.3s var(--ease-out-expo);
+  --transition-base: 0.6s var(--ease-out-expo);
+  --transition-slow: 1s var(--ease-out-expo);
+
+  /* Layout */
+  --container-max: 1440px;
+  --container-padding: clamp(1.25rem, 4vw, 4rem);
+  --nav-height: 5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: initial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+body {
+  background-color: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
 a {
@@ -42,8 +79,221 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+ul, ol {
+  list-style: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background-color: var(--accent);
+  color: var(--black);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+/* ---------- Container ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* ---------- Section ---------- */
+.section {
+  padding: var(--space-2xl) 0;
+  position: relative;
+}
+
+/* ---------- Reveal Animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.line-reveal {
+  overflow: hidden;
+}
+
+.line-reveal span {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+/* ---------- Utility ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Horizontal Rule ---------- */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--gray-700);
+  border: none;
+}
+
+/* ---------- Badge / Tag ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4em 1em;
+  border: 1px solid var(--gray-600);
+  border-radius: 100px;
+  font-size: var(--font-small);
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  opacity: 1;
+}
+
+.badge:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+/* ---------- Button ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1em 2em;
+  font-size: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--white);
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  transform: translateY(101%);
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+  transition: color var(--transition-fast);
+}
+
+.btn:hover span {
+  color: var(--black);
+}
+
+.btn-filled {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.btn-filled::before {
+  background-color: var(--black);
+}
+
+.btn-filled:hover span {
+  color: var(--white);
+}
+
+/* ---------- Decorative Elements ---------- */
+.deco-circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-700);
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.deco-grid {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: 
+    linear-gradient(var(--gray-600) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gray-600) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.deco-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ---------- Page Transitions ---------- */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--black);
+  z-index: 9999;
+  transform: scaleY(0);
+  transform-origin: bottom;
 }
