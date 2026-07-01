@@ -30,7 +30,7 @@ const PROJECTS = [
     type: "UI/UX Development",
     tech: ["Next.js", "Figma", "Prototyping"],
     image: "/images/ecommerce.png",
-    gitlab: "https://gitlab.com/akashappziac/elona/",
+    gitlab: "https://elona-ecommerce-oqkq.vercel.app/",
   },
   {
     number: "04",
