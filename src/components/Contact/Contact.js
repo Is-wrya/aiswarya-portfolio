@@ -196,7 +196,7 @@ export default function Contact() {
                 LinkedIn ↗
               </a>
               <a
-                href="https://gitlab.com"
+                href="https://gitlab.com/iswrya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__social-link"
