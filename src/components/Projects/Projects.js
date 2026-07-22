@@ -94,7 +94,7 @@ export default function Projects() {
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "top top",
+          start: "top -100px",
           end: () => `+=${scrollWidth}`,
           pin: true,
           scrub: 1,
@@ -148,92 +148,92 @@ export default function Projects() {
   }, [isMobile]);
 
   return (
-      <section className="projects" id="projects" ref={sectionRef}>
-        <div className="projects__wrapper">
-          {/* Header */}
-          <div className="projects__header">
-            <div className="projects__label">Selected Work</div>
-            <h2 className="projects__title">Projects</h2>
-          </div>
+    <section className="projects" id="projects" ref={sectionRef} style={{ top: "-54.574951px!important" }}>
+      <div className="projects__wrapper">
+        {/* Header */}
+        <div className="projects__header">
+          <div className="projects__label">Selected Work</div>
+          <h2 className="projects__title">Projects</h2>
+        </div>
 
-          {/* Horizontal Scroll Track */}
-          <div className="projects__horizontal" ref={horizontalRef}>
-            {PROJECTS.map((project, i) => (
-              <article className="project-card" key={i} id={`project-${i + 1}`}>
-                {/* Full-bleed image */}
-                <div className="project-card__image-wrapper">
-                  <img
-                    className="project-card__image"
-                    src={project.image}
-                    alt={project.title.replace("\n", " ")}
-                    loading="lazy"
-                  />
+        {/* Horizontal Scroll Track */}
+        <div className="projects__horizontal" ref={horizontalRef}>
+          {PROJECTS.map((project, i) => (
+            <article className="project-card" key={i} id={`project-${i + 1}`}>
+              {/* Full-bleed image */}
+              <div className="project-card__image-wrapper">
+                <img
+                  className="project-card__image"
+                  src={project.image}
+                  alt={project.title.replace("\n", " ")}
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Gradient overlay */}
+              <div className="project-card__overlay" />
+
+              {/* Content — minimal */}
+              <div className="project-card__content">
+                <div className="project-card__meta">
+                  <span className="project-card__number">{project.number}</span>
+                  <span className="project-card__type">{project.type}</span>
                 </div>
-
-                {/* Gradient overlay */}
-                <div className="project-card__overlay" />
-
-                {/* Content — minimal */}
-                <div className="project-card__content">
-                  <div className="project-card__meta">
-                    <span className="project-card__number">{project.number}</span>
-                    <span className="project-card__type">{project.type}</span>
-                  </div>
-                  <h3 className="project-card__title">
-                    {project.title.split("\n").map((line, li) => (
-                      <span key={li}>
-                        {line}
-                        {li === 0 && <br />}
-                      </span>
-                    ))}
-                  </h3>
-                  <div className="project-card__actions">
-                      <a
-                        href={project.figma}
-                        className="project-card__btn"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`figma-link-${i + 1}`}
-                      >
-                        <span>Figma</span>
-                        <span className="project-card__btn-arrow">→</span>
-                      </a>
-                      <a
-                        href={project.gitlab}
-                        className="project-card__btn"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`gitlab-link-${i + 1}`}
-                      >
-                        <span>GitLab</span>
-                        <span className="project-card__btn-arrow">→</span>
-                      </a>
-                  </div>
+                <h3 className="project-card__title">
+                  {project.title.split("\n").map((line, li) => (
+                    <span key={li}>
+                      {line}
+                      {li === 0 && <br />}
+                    </span>
+                  ))}
+                </h3>
+                <div className="project-card__actions">
+                  <a
+                    href={project.figma}
+                    className="project-card__btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`figma-link-${i + 1}`}
+                  >
+                    <span>Figma</span>
+                    <span className="project-card__btn-arrow">→</span>
+                  </a>
+                  <a
+                    href={project.gitlab}
+                    className="project-card__btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`gitlab-link-${i + 1}`}
+                  >
+                    <span>GitLab</span>
+                    <span className="project-card__btn-arrow">→</span>
+                  </a>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
+        </div>
 
         {/* Scroll Progress Bar */}
-          <div className="projects__progress">
-            <div className="projects__progress-bar">
-              <div className="projects__progress-fill" ref={progressRef}></div>
-            </div>
-          </div>
-
-        {/* Marquee Text */}
-      <div className="projects__marquee">
-        <div className="projects__marquee-track">
-          <div className="projects__marquee-text">
-            DESIGN · DEVELOP · <span>DELIVER</span> · DESIGN · DEVELOP ·{" "}
-            <span>DELIVER</span> ·
-          </div>
-          <div className="projects__marquee-text">
-            DESIGN · DEVELOP · <span>DELIVER</span> · DESIGN · DEVELOP ·{" "}
-            <span>DELIVER</span> ·
+        <div className="projects__progress">
+          <div className="projects__progress-bar">
+            <div className="projects__progress-fill" ref={progressRef}></div>
           </div>
         </div>
-      </div>
+
+        {/* Marquee Text */}
+        <div className="projects__marquee">
+          <div className="projects__marquee-track">
+            <div className="projects__marquee-text">
+              DESIGN · DEVELOP · <span>DELIVER</span> · DESIGN · DEVELOP ·{" "}
+              <span>DELIVER</span> ·
+            </div>
+            <div className="projects__marquee-text">
+              DESIGN · DEVELOP · <span>DELIVER</span> · DESIGN · DEVELOP ·{" "}
+              <span>DELIVER</span> ·
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
